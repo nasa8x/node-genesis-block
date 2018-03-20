@@ -1,0 +1,27 @@
+{
+  "name": "genesis-block",
+  "version": "1.0.0",
+  "description": "Create Genesis Block Proof of Work for Bitcoin, Dash, Litecoin, Zcash...",
+  "main": "genesis.js",
+  "scripts": {
+    
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nasa8x/node-genesis-block.git"
+  },
+  "keywords": [
+    "genesisblock"
+  ],
+  "author": "Nasa8x",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nasa8x/node-genesis-block/issues"
+  },
+  "homepage": "https://github.com/nasa8x/node-genesis-block#readme",
+  "dependencies": {
+    "multi-hashing": "https://github.com/nasa8x/node-multi-hashing.git",
+    "crypto": "^1.0.1"
+  }
+}
