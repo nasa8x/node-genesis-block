@@ -4,7 +4,6 @@
   "description": "Create Genesis Block Proof of Work for Bitcoin, Dash, Litecoin, Zcash...",
   "main": "genesis.js",
   "scripts": {
-    
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,7 +20,8 @@
   },
   "homepage": "https://github.com/nasa8x/node-genesis-block#readme",
   "dependencies": {
+    "crypto": "^1.0.1",
     "multi-hashing": "https://github.com/nasa8x/node-multi-hashing.git",
-    "crypto": "^1.0.1"
+    "yargs": "^11.0.0"
   }
 }
