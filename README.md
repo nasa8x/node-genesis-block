@@ -1,5 +1,6 @@
 ## Create Genesis Block Proof with Node.js
 
+**Tested with Node.js version 8.x.x**
 
 ## setup
 

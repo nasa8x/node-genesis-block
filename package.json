@@ -21,7 +21,7 @@
   "homepage": "https://github.com/nasa8x/node-genesis-block#readme",
   "dependencies": {
     "crypto": "^1.0.1",
-    "multi-hashing": "https://github.com/nasa8x/node-multi-hashing.git",
-    "yargs": "^11.0.0"
+    "multi-hashing": "git+https://github.com/nasa8x/node-multi-hashing.git",
+    "yargs": "^11.1.0"
   }
 }
