@@ -10,6 +10,12 @@ function swapHex(value) {
   return s2;
 }
 
+function intToHex(integer) {
+  let number = integer.toString(16).toUpperCase()
+  if( (number.length % 2) > 0 ) { number= "0" + number }
+  return number
+}
+
 function numToBytes(num, bytes) {
   if (bytes === undefined) bytes = 8;
   if (bytes == 0) return [];
@@ -59,6 +65,7 @@ function reverseBuffer(buff) {
 };
 
 module.exports = {
+  intToHex,
   swapHex,
   numToBytes,
   numToVarInt,

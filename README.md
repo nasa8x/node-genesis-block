@@ -1,6 +1,6 @@
-## Create Genesis Block Proof with Node.js
+## Create Genesis Block Proof of Work with Node.js
 
-**Tested with Node.js version 8.x.x**
+**Tested with Node.js version 12.x.x**
 
 ## setup
 

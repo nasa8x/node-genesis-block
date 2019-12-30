@@ -21,7 +21,7 @@ var defaults = {
     locktime: 0
 }
 
-const argv = require('yargs')
+require('yargs')
     .alias('t', 'time')
     .alias('z', 'timestamp')
     .alias('n', 'nonce')
@@ -33,9 +33,10 @@ const argv = require('yargs')
     .alias('h', 'help')
     .help()
     .command('*', 'create genesis block', () => { }, (argv) => {
-        //console.log(argv);
+        // console.log(argv);
+
         var options = Object.assign({}, defaults, argv);
-        //console.log(options);
+        // console.log(options);
 
         var merkle_root = $.sha256d(createTx(options));
         var genesisblock = createBlock(merkle_root, options);
@@ -48,6 +49,7 @@ const argv = require('yargs')
         console.log("merkle root hash: %s", $.reverseBuffer(merkle_root).toString('hex'));
 
         PoW(genesisblock, options);
+
         //console.log("genesis block: %s", genesisblock.toString('hex'));
         // console.log($.reverseBuffer(hash_merkle_root).toString('hex'));
 
@@ -69,9 +71,10 @@ function createOutputScript(options) {
 
 function createTx(options) {
 
+
     var input = createInputScript(options);
     var out = createOutputScript(options);
-
+   
     var size = 4    // tx version
         + 1   // number of inputs
         + 32  // hash of previous output
@@ -87,25 +90,31 @@ function createTx(options) {
 
 
     var tx = Buffer.alloc(size);
+
     var position = 0;
-    tx.writeIntLE(1, position, true);
-    tx.writeIntLE(1, position += 4, true);
-    tx.write(new Buffer(32).toString('hex'), position += 1, 32, 'hex');
-    tx.writeInt32LE(0xFFFFFFFF, position += 32, true);
-    tx.writeIntLE(input.length, position += 4, true);
+
+    tx.writeInt32LE(1, position);
+    tx.writeInt32LE(1, position += 4);
+    tx.write(Buffer.alloc(32).toString('hex'), position += 1, 32, 'hex');
+    //tx.writeInt32LE(0xFFFFFFFF, position += 32, 4);
+    tx.writeDoubleLE(0xFFFFFFFF, position += 32, 4);
+    tx.writeInt32LE(input.length, position += 4);
     tx.write(input.toString('hex'), position += 1, input.length, "hex");
-    tx.writeInt32LE(0xFFFFFFFF, position += input.length, true);
-    tx.writeIntLE(1, position += 4);
+    //tx.writeInt32LE(0xFFFFFFFF, position += input.length, 4);
+    tx.writeDoubleLE(0xFFFFFFFF, position += input.length);
+    tx.writeInt32LE(1, position += 4);
     tx.write(Buffer.from($.numToBytes(options.value)).toString('hex'), position += 1, 8, 'hex'); // 50 * coin
     tx.writeInt32LE(0x43, position += 8);
     //tx.write(input.toString('hex'), position += 1, input.length, "hex");
     tx.write(out.toString('hex'), position += 1, out.length, "hex");
-    tx.writeIntLE(options.locktime, position += out.length);
+    tx.writeInt32LE(options.locktime, position += out.length);
 
 
-    //console.log(tx.toString('hex'));
+    // console.log(tx.toString('hex'));
 
     return tx;
+
+
 
 };
 
@@ -115,8 +124,8 @@ function createBlock(merkleRoot, options) {
     var block = Buffer.alloc(80);
     var position = 0;
 
-    block.writeIntLE(1, position); //version  
-    block.write(new Buffer(32).toString('hex'), position += 4, 32, 'hex'); //previousblockhash
+    block.writeInt32LE(1, position); //version  
+    block.write(Buffer.alloc(32).toString('hex'), position += 4, 32, 'hex'); //previousblockhash
     block.write(merkleRoot.toString('hex'), position += 32, 32, 'hex');
     block.writeInt32LE(options.time, position += 32);
     //block.write(Buffer.from($.numToBytes(options.time)).toString('hex'), position += 32, 4, 'hex');
@@ -124,7 +133,7 @@ function createBlock(merkleRoot, options) {
     block.writeInt32LE(options.bits, position += 4);
     //block.write(Buffer.from($.numToBytes(options.bits)).toString('hex'), position += 4, 4, 'hex');
 
-    block.writeIntLE(options.nonce, position += 4);
+    block.writeInt32LE(options.nonce, position += 4);
 
     return block;
 
