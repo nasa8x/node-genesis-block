@@ -33,6 +33,7 @@ npm install
 
 ## algorithms
 ----------
+* bitcoin/sha256d
 * x11
 * x13
 * x15

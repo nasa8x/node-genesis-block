@@ -144,6 +144,12 @@ function PoW(data, options) {
     console.log('Searching for genesis hash...');
     var nonce = options.nonce;
 
+    // Add sha256d from utils into Hash object
+    // We could just stuff it in there to begin with at the start
+    if (options.algorithm === "sha256d") {
+	Hash[options.algorithm] = $.sha256d;
+    }
+
     //var target = $.numToBytes((options.bits & 0xffffff) * 2 ** (8 * ((options.bits >> 24) - 3)));
     // console.log('' + target.toString('hex'));    
 
